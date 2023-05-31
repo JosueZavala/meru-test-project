@@ -35,6 +35,10 @@ const actions = {
       productsAdded.push(newProduct);
     }
 
+    localStorage.setItem(
+      "meruCart",
+      JSON.stringify({ productsAdded, total: newTotal })
+    );
     return { ...state, productsAdded, total: newTotal };
   },
 
@@ -55,6 +59,11 @@ const actions = {
       newProductsAdded = newProductArray;
     }
 
+    localStorage.setItem(
+      "meruCart",
+      JSON.stringify({ productsAdded: newProductsAdded, total: newTotal })
+    );
+
     return { ...state, productsAdded: newProductsAdded, total: newTotal };
   },
 
@@ -70,10 +79,25 @@ const actions = {
       (element) => element.id !== productId
     );
 
+    localStorage.setItem(
+      "meruCart",
+      JSON.stringify({ productsAdded: newProductArray, total: newTotal })
+    );
     return { ...state, productsAdded: newProductArray, total: newTotal };
   },
 
+  loadFromLocalStorage: (state: State, loadedState: State): State => {
+    return {
+      productsAdded: loadedState.productsAdded,
+      total: loadedState.total,
+    };
+  },
+
   reset: (): State => {
+    localStorage.setItem(
+      "meruCart",
+      JSON.stringify({ productsAdded: [], total: 0 })
+    );
     return { productsAdded: [], total: 0 };
   },
 };

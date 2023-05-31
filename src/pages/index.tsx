@@ -1,6 +1,7 @@
 import IntroductionCard from "@/components/IntroductionCard/IntroductionCard";
 import MenuBar from "@/components/MenuBar/MenuBar";
 import Products from "@/components/Products/Products";
+import { useCartContext } from "@/context/cartContext";
 import { useProducts } from "@/Hooks/Products";
 import { PAGINATION_SIZE } from "@/typings/aplication";
 import Head from "next/head";
@@ -12,6 +13,7 @@ export default function Home() {
   const [totalPages, setTotalPages] = useState(0);
   const [count, setCount] = useState(0);
   const [currentPage, setCurrentPage] = useState(1);
+  const { state, dispatch } = useCartContext();
 
   const { data: results, refetch } = useProducts(
     nameFilter,
@@ -26,11 +28,23 @@ export default function Home() {
     }
   }, [results]);
 
+  useEffect(() => {
+    //Load from LocalStorage
+    const meruCart = localStorage.getItem("meruCart");
+    if (meruCart) {
+      const loadedState = JSON.parse(meruCart);
+      dispatch({ type: "loadFromLocalStorage", payload: loadedState });
+    }
+  }, []);
+
   return (
     <main className={`flex min-h-screen flex-col items-center p-4 sm:p-8`}>
       <Head>
         <title>Meru Test Project</title>
-        <meta name="description" content="Home - Next App Created by Josue Zavala" />
+        <meta
+          name="description"
+          content="Home - Next App Created by Josue Zavala"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <IntroductionCard />
