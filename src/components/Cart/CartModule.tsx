@@ -14,7 +14,7 @@ const CartModule: React.FC = () => {
     const product = productsAdded.find((element) => element.id === id);
     dispatch({ type: "removeProduct", payload: product?.id });
 
-    toast(`${product?.title} Removed from cart !!!`);
+    toast(`${product?.name} Removed from cart !!!`);
   };
 
   const handleReduceProduct = (id: number) => {
@@ -22,7 +22,7 @@ const CartModule: React.FC = () => {
     const product = productsAdded.find((element) => element.id === id);
     dispatch({ type: "reduceProduct", payload: product?.id });
 
-    toast(`${product?.title} amount Reduced!!!`);
+    toast(`${product?.name} amount Reduced!!!`);
   };
 
   const handleIncreaseProduct = (id: number) => {
@@ -30,7 +30,7 @@ const CartModule: React.FC = () => {
     const product = productsAdded.find((element) => element.id === id);
     dispatch({ type: "addProduct", payload: product });
 
-    toast(`${product?.title} amount Increased !!!`);
+    toast(`${product?.name} amount Increased !!!`);
   };
 
   useEffect(() => {
@@ -41,7 +41,7 @@ const CartModule: React.FC = () => {
           <CartElement
             key={`cartElement_${element.id}`}
             id={element.id}
-            title={element.title}
+            name={element.name}
             description={element.description}
             price={element.price}
             amount={element.amount}

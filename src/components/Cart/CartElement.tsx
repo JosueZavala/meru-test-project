@@ -4,7 +4,7 @@ import Image from "next/image";
 
 const CartElement: React.FC<CartElementProps> = ({
   id,
-  title,
+  name,
   description,
   price = 0,
   image = "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
@@ -27,7 +27,7 @@ const CartElement: React.FC<CartElementProps> = ({
 
       <div className="basis-3/5">
         <div className="flex flex-col gap-2 p-2">
-          <div className="text-2xl">{title}</div>
+          <div className="text-2xl">{name}</div>
           <div className="text-sm text-slate-300">{description}</div>
         </div>
       </div>

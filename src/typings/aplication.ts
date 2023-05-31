@@ -18,7 +18,7 @@ export type Results = {
   image: string;
   price: number;
   rating?: Rating;
-  title: string;
+  name: string;
 };
 
 export type productsParam = {
@@ -29,7 +29,7 @@ export type productsParam = {
 
 export type ProductsCardProps = {
   id: number;
-  title: string;
+  name: string;
   price: number;
   image: string;
   onAddProduct: (id: number) => void;
@@ -45,7 +45,7 @@ export type PaginationProps = {
 
 export type CartElementProps = {
   id: number;
-  title: string;
+  name: string;
   description: string;
   price: number;
   image?: string;
@@ -57,7 +57,7 @@ export type CartElementProps = {
 
 export type CartElement = {
   id: number;
-  title: string;
+  name: string;
   description: string;
   price: number;
   image: string;

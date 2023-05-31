@@ -24,7 +24,7 @@ export default function Home() {
   useEffect(() => {
     if (results) {
       setCount(results.length);
-      setTotalPages(results.length / PAGINATION_SIZE);
+      setTotalPages(Math.ceil(results.length / PAGINATION_SIZE));
     }
   }, [results]);
 

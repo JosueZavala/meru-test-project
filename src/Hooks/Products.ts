@@ -23,13 +23,10 @@ export const useProducts = (
     "Products",
     async () =>
       httpClient
-        .get(`/products/`, { params })
+        .get(`/products.json`, { params })
+        .then((res) => res.data)
         .then((res) => res.data)
         .catch((error) => console.log(error)),
     { refetchOnWindowFocus }
   );
 };
-
-/* fetch('https://api.storerestapi.com/products?limit=10&page=1')
-.then(response => response.json())
-.then(json => console.log(json)) */
