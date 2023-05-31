@@ -21,7 +21,7 @@ export default function Home() {
 
   useEffect(() => {
     if (results) {
-      //console.log(results);
+      /* console.log(results); */
       setCount(results.length);
       setTotalPages(results.length / PAGINATION_SIZE);
     }
@@ -31,10 +31,7 @@ export default function Home() {
     <main className={`flex min-h-screen flex-col items-center p-4 sm:p-8`}>
       <Head>
         <title>Meru Test Project</title>
-        <meta
-          name="description"
-          content="Home - Next App Created by Josue Zavala"
-        />
+        <meta name="description" content="Home - Next App Created by Josue Zavala" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <IntroductionCard />

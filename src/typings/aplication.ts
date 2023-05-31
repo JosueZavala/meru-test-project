@@ -28,10 +28,11 @@ export type productsParam = {
 };
 
 export type ProductsCardProps = {
+  id: number;
   title: string;
-  description: string;
   price: number;
   image: string;
+  onAddProduct: (id: number) => void;
 };
 
 export type PaginationProps = {
@@ -43,24 +44,12 @@ export type PaginationProps = {
 };
 
 export type CartElementProps = {
-  id: string;
+  id: number;
   title: string;
   description: string;
   price: number;
   image?: string;
   amount: number;
-};
-
-export const statusCharacters = {
-  alive: "Alive",
-  dead: "Dead",
-  unknown: "unknown",
-};
-
-export const StatusColor = {
-  [statusCharacters.alive]: "text-green-500",
-  [statusCharacters.dead]: "text-red-500",
-  [statusCharacters.unknown]: "text-purple-400",
 };
 
 export const PAGINATION_SIZE = 20;

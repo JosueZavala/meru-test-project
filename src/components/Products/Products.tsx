@@ -16,6 +16,10 @@ const Products: React.FC<ProductsProps> = ({
 
   const { state, dispatch } = useCartContext();
 
+  const handleAddProduct = (id: number) => {
+    const product = products.find((element) => element.id === id);
+    dispatch({ type: "addProduct", payload: product });
+  };
 
   const createProducts = () => {
     const _products = results.map((product) => {
@@ -36,10 +40,11 @@ const Products: React.FC<ProductsProps> = ({
       return (
         <ProductsCard
           key={`product_${product.id}`}
+          id={product.id}
           title={product.title}
-          description={product.description}
           price={product.price}
           image={product.image}
+          onAddProduct={handleAddProduct}
         />
       );
     });
@@ -53,6 +58,10 @@ const Products: React.FC<ProductsProps> = ({
   useEffect(() => {
     createProductsCards();
   }, [products]);
+
+  useEffect(() => {
+    if (state) console.log(state);
+  }, [state]);
 
   return (
     <div className="flex flex-wrap bg-stone-100 rounded-md w-full mt-8 py-5 mx-auto mb-5 lg:w-1/2 max-w-4xl">

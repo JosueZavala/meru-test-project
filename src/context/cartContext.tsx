@@ -1,4 +1,4 @@
-import { CartElementProps } from "@/typings/aplication";
+import { CartElementProps, Results } from "@/typings/aplication";
 import { createContext, useContext, useReducer } from "react";
 
 type State = {
@@ -12,17 +12,30 @@ const initialValues: State = {
 };
 
 const actions = {
-  addProduct: (state: State, productsAdded: any): State => {
-    return { ...state, productsAdded };
-  },
-  reduceProduct: (state: State, productsAdded: any): State => {
-    return { ...state, productsAdded };
-  },
-  total: (state: State, total: number): State => {
-    return { ...state, total };
-  },
-  reset: () => {
-    return initialValues;
+  addProduct: (state: State, productToAdd: Results): State => {
+    const { productsAdded, total } = state;
+    const { id, title, description, price, image } = productToAdd;
+    const newProduct = {
+      id,
+      title,
+      description,
+      price,
+      image,
+      amount: 1,
+    };
+    let newTotal = total + productToAdd.price;
+
+    const product = productsAdded.find(
+      (element) => element.id === productToAdd.id
+    );
+
+    if (product?.id) {
+      product.amount++;
+    } else {
+      productsAdded.push(newProduct);
+    }
+
+    return { ...state, productsAdded, total: newTotal };
   },
 };
 

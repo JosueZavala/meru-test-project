@@ -31,7 +31,7 @@ const CartModule: React.FC = () => {
         <div className="h-auto mx-auto">No found any Product</div>
       )} */}
       <CartElement
-        id="1"
+        id={1}
         title="Producto Prueba 1"
         description="Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
         price={20.0}
