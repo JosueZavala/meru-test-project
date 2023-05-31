@@ -14,10 +14,10 @@ const initialValues: State = {
 const actions = {
   addProduct: (state: State, productToAdd: Results): State => {
     const { productsAdded, total } = state;
-    const { id, title, description, price, image } = productToAdd;
+    const { id, name, description, price, image } = productToAdd;
     const newProduct = {
       id,
-      title,
+      name,
       description,
       price,
       image,
