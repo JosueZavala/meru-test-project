@@ -1,8 +1,10 @@
 import { useCartContext } from "@/context/cartContext";
 import { ProductsProps, Results } from "@/typings/aplication";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
 import Pagination from "../Pagination/pagination";
 import ProductsCard from "./ProductsCard";
+import "react-toastify/dist/ReactToastify.css";
 
 const Products: React.FC<ProductsProps> = ({
   results,
@@ -19,6 +21,8 @@ const Products: React.FC<ProductsProps> = ({
   const handleAddProduct = (id: number) => {
     const product = products.find((element) => element.id === id);
     dispatch({ type: "addProduct", payload: product });
+
+    toast(`${product?.title} Added to cart !!!`);
   };
 
   const createProducts = () => {
@@ -87,6 +91,7 @@ const Products: React.FC<ProductsProps> = ({
       {products.length === 0 && (
         <div className="h-auto mx-auto">No found any Products</div>
       )}
+      <ToastContainer />
     </div>
   );
 };
