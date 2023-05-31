@@ -72,6 +72,10 @@ const actions = {
 
     return { ...state, productsAdded: newProductArray, total: newTotal };
   },
+
+  reset: (): State => {
+    return { productsAdded: [], total: 0 };
+  },
 };
 
 type OAction = typeof actions;

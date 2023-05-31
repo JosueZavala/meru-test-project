@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useCartContext } from "@/context/cartContext";
-import { Results } from "@/typings/aplication";
 import CartElement from "./CartElement";
 import "react-toastify/dist/ReactToastify.css";
 
