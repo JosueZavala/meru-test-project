@@ -29,3 +29,7 @@ export const useProducts = (
     { refetchOnWindowFocus }
   );
 };
+
+/* fetch('https://api.storerestapi.com/products?limit=10&page=1')
+.then(response => response.json())
+.then(json => console.log(json)) */

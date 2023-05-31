@@ -42,6 +42,15 @@ export type PaginationProps = {
   onPageChange: (page: number) => void;
 };
 
+export type CartElementProps = {
+  id: string;
+  title: string;
+  description: string;
+  price: number;
+  image?: string;
+  amount: number;
+};
+
 export const statusCharacters = {
   alive: "Alive",
   dead: "Dead",
@@ -53,3 +62,5 @@ export const StatusColor = {
   [statusCharacters.dead]: "text-red-500",
   [statusCharacters.unknown]: "text-purple-400",
 };
+
+export const PAGINATION_SIZE = 20;

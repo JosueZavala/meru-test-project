@@ -1,6 +1,8 @@
 import IntroductionCard from "@/components/IntroductionCard/IntroductionCard";
+import MenuBar from "@/components/MenuBar/MenuBar";
 import Products from "@/components/Products/Products";
 import { useProducts } from "@/Hooks/Products";
+import { PAGINATION_SIZE } from "@/typings/aplication";
 import Head from "next/head";
 import { useState, useEffect } from "react";
 
@@ -17,21 +19,26 @@ export default function Home() {
     currentPage
   );
 
-  debugger;
-  //const results: [] = [];
-
   useEffect(() => {
-    if (results) console.log(results);
+    if (results) {
+      //console.log(results);
+      setCount(results.length);
+      setTotalPages(results.length / PAGINATION_SIZE);
+    }
   }, [results]);
 
   return (
     <main className={`flex min-h-screen flex-col items-center p-4 sm:p-8`}>
       <Head>
         <title>Meru Test Project</title>
-        <meta name="description" content="Next App Created by Josue Zavala" />
+        <meta
+          name="description"
+          content="Home - Next App Created by Josue Zavala"
+        />
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <IntroductionCard />
+      <MenuBar />
       <Products
         results={results || []}
         count={count}

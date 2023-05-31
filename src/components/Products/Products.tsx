@@ -1,8 +1,8 @@
+import { useCartContext } from "@/context/cartContext";
 import { ProductsProps, Results } from "@/typings/aplication";
 import { useEffect, useState } from "react";
 import Pagination from "../Pagination/pagination";
 import ProductsCard from "./ProductsCard";
-
 
 const Products: React.FC<ProductsProps> = ({
   results,
@@ -12,7 +12,10 @@ const Products: React.FC<ProductsProps> = ({
   onPageChange,
 }) => {
   const [products, setProducts] = useState<Results[]>([]);
-  const [charactersCards, setCharactersCards] = useState<JSX.Element[]>([]);
+  const [productsCards, setProductsCards] = useState<JSX.Element[]>([]);
+
+  const { state, dispatch } = useCartContext();
+
 
   const createProducts = () => {
     const _products = results.map((product) => {
@@ -40,7 +43,7 @@ const Products: React.FC<ProductsProps> = ({
         />
       );
     });
-    setCharactersCards(_productsCards);
+    setProductsCards(_productsCards);
   };
 
   useEffect(() => {
@@ -50,7 +53,6 @@ const Products: React.FC<ProductsProps> = ({
   useEffect(() => {
     createProductsCards();
   }, [products]);
-
 
   return (
     <div className="flex flex-wrap bg-stone-100 rounded-md w-full mt-8 py-5 mx-auto mb-5 lg:w-1/2 max-w-4xl">
@@ -63,7 +65,7 @@ const Products: React.FC<ProductsProps> = ({
             onPageChange={onPageChange}
           />
           <div className="flex flex-wrap w-full h-auto pl-5 mb-5 mt-5 justify-center">
-            {charactersCards}
+            {productsCards}
           </div>
           <Pagination
             count={count}
@@ -74,7 +76,7 @@ const Products: React.FC<ProductsProps> = ({
         </>
       )}
       {products.length === 0 && (
-        <div className="h-auto mx-auto">No found any characters</div>
+        <div className="h-auto mx-auto">No found any Products</div>
       )}
     </div>
   );
