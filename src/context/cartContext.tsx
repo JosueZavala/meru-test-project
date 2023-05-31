@@ -1,8 +1,8 @@
-import { CartElementProps, Results } from "@/typings/aplication";
+import { CartElement, Results } from "@/typings/aplication";
 import { createContext, useContext, useReducer } from "react";
 
 type State = {
-  productsAdded: CartElementProps[];
+  productsAdded: CartElement[];
   total: number;
 };
 
@@ -36,6 +36,41 @@ const actions = {
     }
 
     return { ...state, productsAdded, total: newTotal };
+  },
+
+  reduceProduct: (state: State, productId: number): State => {
+    const { productsAdded, total } = state;
+
+    const product = productsAdded.find((element) => element.id === productId);
+    let newProductsAdded;
+    const newTotal = total - product!.price;
+
+    if (product?.amount && product?.amount > 1) {
+      product.amount--;
+      newProductsAdded = productsAdded;
+    } else {
+      const newProductArray = productsAdded.filter(
+        (element) => element.id !== productId
+      );
+      newProductsAdded = newProductArray;
+    }
+
+    return { ...state, productsAdded: newProductsAdded, total: newTotal };
+  },
+
+  removeProduct: (state: State, productId: number): State => {
+    const { productsAdded, total } = state;
+
+    const product = productsAdded.find((element) => element.id === productId);
+    const priceToReduce = product!.amount * product!.price;
+
+    const newTotal = total - priceToReduce;
+
+    const newProductArray = productsAdded.filter(
+      (element) => element.id !== productId
+    );
+
+    return { ...state, productsAdded: newProductArray, total: newTotal };
   },
 };
 

@@ -21,7 +21,6 @@ export default function Home() {
 
   useEffect(() => {
     if (results) {
-      /* console.log(results); */
       setCount(results.length);
       setTotalPages(results.length / PAGINATION_SIZE);
     }

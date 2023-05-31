@@ -1,5 +1,6 @@
 import CartModule from "@/components/Cart/CartModule";
 import IntroductionCard from "@/components/IntroductionCard/IntroductionCard";
+import MenuBar from "@/components/MenuBar/MenuBar";
 import Head from "next/head";
 
 export default function Cart() {
@@ -14,6 +15,7 @@ export default function Cart() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <IntroductionCard />
+      <MenuBar />
       <CartModule />
     </main>
   );

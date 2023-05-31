@@ -1,42 +1,71 @@
-import { Results } from "@/typings/aplication";
 import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import { useCartContext } from "@/context/cartContext";
+import { Results } from "@/typings/aplication";
 import CartElement from "./CartElement";
+import "react-toastify/dist/ReactToastify.css";
 
 const CartModule: React.FC = () => {
-  const [products, setProducts] = useState<Results[]>([]);
-  const [productsCards, setProductsCards] = useState<JSX.Element[]>([]);
+  const [cartElements, setCartElements] = useState<JSX.Element[]>([]);
+
+  const { state, dispatch } = useCartContext();
+
+  const handleRemoveProduct = (id: number) => {
+    const { productsAdded } = state;
+    const product = productsAdded.find((element) => element.id === id);
+    dispatch({ type: "removeProduct", payload: product?.id });
+
+    toast(`${product?.title} Removed from cart !!!`);
+  };
+
+  const handleReduceProduct = (id: number) => {
+    const { productsAdded } = state;
+    const product = productsAdded.find((element) => element.id === id);
+    dispatch({ type: "reduceProduct", payload: product?.id });
+
+    toast(`${product?.title} amount Reduced!!!`);
+  };
+
+  const handleIncreaseProduct = (id: number) => {
+    const { productsAdded } = state;
+    const product = productsAdded.find((element) => element.id === id);
+    dispatch({ type: "addProduct", payload: product });
+
+    toast(`${product?.title} amount Increased !!!`);
+  };
+
+  useEffect(() => {
+    if (state) {
+      const { productsAdded } = state;
+      const newCartElements = productsAdded.map((element) => {
+        return (
+          <CartElement
+            key={`cartElement_${element.id}`}
+            id={element.id}
+            title={element.title}
+            description={element.description}
+            price={element.price}
+            amount={element.amount}
+            image={element.image}
+            onAddProduct={handleIncreaseProduct}
+            onReduceProduct={handleReduceProduct}
+            onRemoveProduct={handleRemoveProduct}
+          />
+        );
+      });
+      setCartElements(newCartElements);
+    }
+  }, [state]);
 
   return (
     <div className="flex flex-wrap bg-stone-100 rounded-md w-full mt-8 py-5 mx-auto mb-5 lg:w-3/4 max-w-4xl">
-      {/*       {products && products.length > 0 && (
-        <>
-          <Pagination
-            count={count}
-            totalPages={totalPages}
-            currentPage={currentPage}
-            onPageChange={onPageChange}
-          />
-          <div className="flex flex-wrap w-full h-auto pl-5 mb-5 mt-5 justify-center">
-            {productsCards}
-          </div>
-          <Pagination
-            count={count}
-            totalPages={totalPages}
-            currentPage={currentPage}
-            onPageChange={onPageChange}
-          />
-        </>
-      )} */}
-      {/* {products.length === 0 && (
+      {cartElements && cartElements.length > 0 && (
+        <div className="grid gap-3">{cartElements}</div>
+      )}
+      {cartElements.length === 0 && (
         <div className="h-auto mx-auto">No found any Product</div>
-      )} */}
-      <CartElement
-        id={1}
-        title="Producto Prueba 1"
-        description="Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday"
-        price={20.0}
-        amount={20}
-      />
+      )}
+      <ToastContainer />
     </div>
   );
 };

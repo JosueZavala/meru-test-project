@@ -3,12 +3,15 @@ import { CartElementProps } from "@/typings/aplication";
 import Image from "next/image";
 
 const CartElement: React.FC<CartElementProps> = ({
-  id = "1",
+  id,
   title,
   description,
   price = 0,
   image = "https://fakestoreapi.com/img/81fPKd-2AYL._AC_SL1500_.jpg",
   amount = 0,
+  onAddProduct,
+  onReduceProduct,
+  onRemoveProduct,
 }) => {
   return (
     <div className="flex flex-row w-11/12 rounded-2xl mx-auto bg-gray-700 text-white p-2 gap-4">
@@ -33,14 +36,29 @@ const CartElement: React.FC<CartElementProps> = ({
         <div className="flex flex-col w-full gap-2">
           <div>Price: ${price}</div>
           <div>
-            Amount: <span className="mx-2">-</span>
-            {amount} <span className="ml-2">+</span>
+            Amount:{" "}
+            <span
+              onClick={() => onReduceProduct(id)}
+              className="mx-2 cursor-pointer"
+            >
+              -
+            </span>
+            {amount}{" "}
+            <span
+              onClick={() => onAddProduct(id)}
+              className="ml-2 cursor-pointer"
+            >
+              +
+            </span>
           </div>
           <div>SubTotal: ${price * amount}</div>
         </div>
       </div>
       <div className="flex items-center">
-        <RiDeleteBin2Line />
+        <RiDeleteBin2Line
+          className="cursor-pointer"
+          onClick={() => onRemoveProduct(id)}
+        />
       </div>
     </div>
   );

@@ -63,9 +63,6 @@ const Products: React.FC<ProductsProps> = ({
     createProductsCards();
   }, [products]);
 
-  useEffect(() => {
-    if (state) console.log(state);
-  }, [state]);
 
   return (
     <div className="flex flex-wrap bg-stone-100 rounded-md w-full mt-8 py-5 mx-auto mb-5 lg:w-1/2 max-w-4xl">

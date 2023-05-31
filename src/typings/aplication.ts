@@ -50,6 +50,20 @@ export type CartElementProps = {
   price: number;
   image?: string;
   amount: number;
+  onAddProduct: (id: number) => void;
+  onReduceProduct: (id: number) => void;
+  onRemoveProduct: (id: number) => void;
+};
+
+export type CartElement = {
+  id: number;
+  title: string;
+  description: string;
+  price: number;
+  image: string;
+  amount: number;
+  category?: string;
+  rating?: Rating;
 };
 
 export const PAGINATION_SIZE = 20;
